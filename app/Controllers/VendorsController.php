@@ -31,6 +31,7 @@ class VendorsController extends BaseController
 
 
     }
+    
 
     //* ROUTE: GET /vendors/{vendor_id}
     public function handleGetVendorById(
