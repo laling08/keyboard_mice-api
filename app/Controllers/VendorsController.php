@@ -10,48 +10,26 @@ use Slim\Exception\HttpNotFoundException;
 class VendorsController extends BaseController
 {
     public function __construct(private VendorsModel $vendors_model) {}
-    // this class will be used to create the callback
+    /**
+     * Handles GET /vendors
+     * Returns a paginated list of vendors with optional filters.
+     *
+     * @param Request $request The HTTP Request.
+     * @param Response $response The HTTP Response.
+     * @return Response JSON response with vendors data.
+     */
     public function handleGetVendors(Request $request, Response $response): Response
     {
+        // TODO: Get a list of zero or more vendor resources that match the request's filtering criteria
 
-        // Test the request and response cycle, because b4 writing the entire logic, we must test
-        // the callback function
-        // echo "Please work";
-        // exit;
-
-        // todo: add support for filtering /vendors collection by name
-        //* STEP 1: Retrieve the filters from the request object.
+        //* Get filters from query string.
         $filters = $request->getQueryParams();
-        //dd($filters); //? NOTE: inspect or output the received filters.
-
-        // todo: validate the received pagination.
-        //? Hint: both must be positive integers.
-        //? We need to put this in the Base controller.
-        //* Use built-in PHP functions:
-        //* Option 1: 1) is_* [e.g, is_int($value)]
-        //* Option 2: 2) RegEx(e.g., ^[-+]?\d+$)
-
-        // $page = $filters["page"];
-        // $page_size = $filters["page_size"];
-        // $this->vendors_model->setPaginationOptions($page,$page_size);
-
-        //* STEP 2: Pass the filters to the model.
+        //* Fetch vendors from database.
         $vendors = $this->vendors_model->getVendors($filters);
+        //* Return JSON response.
+        return $this->renderJson($response, $vendors);
 
 
-
-        //$vendors = $this->vendors_model->getVendors([]);
-        // var_dump ($vendors);
-        // exit;
-
-        // Convert array to JSON and return it.
-        $payload = json_encode($vendors);
-        $response->getBody()->write($payload);
-
-        return $response->withHeader(
-            HEADERS_CONTENT_TYPE,
-            APP_MEDIA_TYPE_JSON
-        );
     }
 
     //* ROUTE: GET /vendors/{vendor_id}
@@ -106,6 +84,6 @@ class VendorsController extends BaseController
         //     APP_MEDIA_TYPE_JSON
         //     );
 
-        
+
     }
 }
