@@ -27,40 +27,62 @@ class VendorsModel extends BaseModel
      * @param array $filters Associative array of filter parameters
      * @return array Paginated result with meta and data
      */
+    /**
+     * Retrieves vendors with optional filtering
+     *
+     * Supported filters:
+     * - country: vendor country
+     * - founded_after: minimum founding year
+     * - founded_before: maximum founding year
+     * - keyboard_count_min: minimum number of keyboards produced
+     * - avg_price_min: minimum average keyboard price
+     * - avg_price_max: maximum average keyboard price
+     *
+     * @param array $filters Associative array of filter parameters
+     * @return array Paginated result with meta and data
+     */
     public function getVendors(array $filters): array
     {
-        //* Join with keyboards to calculate aggregates.
+        // Join with keyboards to calculate aggregates
         $sql = "SELECT v.*,
-                        COUNT(DISTINCT k.keyboard_id) as keyboard_count,
-                        AVG(k.price) as avg_keyboard_price
+                       COUNT(DISTINCT k.keyboard_id) as keyboard_count,
+                       AVG(k.price) as avg_keyboard_price
                 FROM vendors v
-                LEFT JOIN keyboards k ON v.vendor_id = k.vendor.id
+                LEFT JOIN keyboards k ON v.vendor_id = k.vendor_id
                 WHERE 1=1";
+
         $pdo_values = [];
 
-        //* Filter by country
+        // Filter by country
         if (!empty($filters["country"])) {
             $sql .= " AND v.country = :country";
-            $$pdo_values["country"] = $filters["country"];
+            $pdo_values["country"] = $filters["country"];
         }
 
-        //* Filter by founded year after
+        // Filter by founded after year
         if (!empty($filters["founded_after"])) {
             $sql .= " AND v.founded_year >= :founded_after";
-            $pdo_values["founded_year"] = $filters["founded_after"];
+            $pdo_values["founded_after"] = $filters["founded_after"];
         }
 
-        //* Filter by founded year before
+        // Filter by founded before year
         if (!empty($filters["founded_before"])) {
             $sql .= " AND v.founded_year <= :founded_before";
-            $pdo_values["founded_year"] = $filters["founded_before"];
+            $pdo_values["founded_before"] = $filters["founded_before"];
         }
 
-        //* Group by vendor to calculate aggregates
-        $sql .= " GROUP BY v.vender_id";
+        // Group by vendor to calculate aggregates
+        $sql .= " GROUP BY v.vendor_id";
 
-        //* Filter by average keyboard price range
+        // Filter by keyboard count minimum (using HAVING for aggregates)
+        if (!empty($filters["keyboard_count_min"])) {
+            $sql .= " HAVING COUNT(DISTINCT k.keyboard_id) >= :keyboard_count_min";
+            $pdo_values["keyboard_count_min"] = $filters["keyboard_count_min"];
+        }
+
+        // Filter by average keyboard price range
         if (!empty($filters["avg_price_min"])) {
+            // Check if HAVING clause already exists
             if (empty($filters["keyboard_count_min"])) {
                 $sql .= " HAVING AVG(k.price) >= :avg_price_min";
             } else {
@@ -70,7 +92,8 @@ class VendorsModel extends BaseModel
         }
 
         if (!empty($filters["avg_price_max"])) {
-            if (empty($filters ["keyboard_count_min"]) && empty($filters["avg_price_min"])) {
+            // Check if HAVING clause already exists
+            if (empty($filters["keyboard_count_min"]) && empty($filters["avg_price_min"])) {
                 $sql .= " HAVING AVG(k.price) <= :avg_price_max";
             } else {
                 $sql .= " AND AVG(k.price) <= :avg_price_max";
@@ -81,7 +104,8 @@ class VendorsModel extends BaseModel
         return $this->paginate($sql, $pdo_values);
     }
 
-    function findVendorById(int $vendor_id) : mixed {
+    function findVendorById(int $vendor_id): mixed
+    {
 
         $sql = "SELECT * FROM vendors WHERE vendor_id = :vendor_id";
         $vendor = $this->fetchSingle(
