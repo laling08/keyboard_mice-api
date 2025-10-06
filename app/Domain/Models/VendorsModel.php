@@ -17,29 +17,16 @@ class VendorsModel extends BaseModel
     /**
      * Retrieves vendors with optional filtering.
      *
-     * Supported Filters:
-     * - country: vendor country
-     * - founded-after: minimum founding year
-     * - founded-before: maximum founding year
-     * - keyboard_count_min: minimum number of keyboards produced
-     * - avg_price_min: minimum average keyboard price
-     * - avg_price_max: maximum average keyboard price
-     * @param array $filters Associative array of filter parameters
-     * @return array Paginated result with meta and data
-     */
-    /**
-     * Retrieves vendors with optional filtering
-     *
      * Supported filters:
-     * - country: vendor country
-     * - founded_after: minimum founding year
-     * - founded_before: maximum founding year
-     * - keyboard_count_min: minimum number of keyboards produced
-     * - avg_price_min: minimum average keyboard price
-     * - avg_price_max: maximum average keyboard price
+     * - country: vendor country.
+     * - founded_after: minimum founding year.
+     * - founded_before: maximum founding year.
+     * - keyboard_count_min: minimum number of keyboards produced.
+     * - avg_price_min: minimum average keyboard price.
+     * - avg_price_max: maximum average keyboard price.
      *
-     * @param array $filters Associative array of filter parameters
-     * @return array Paginated result with meta and data
+     * @param array $filters Associative array of filter parameters.
+     * @return array Paginated result with meta and data.
      */
     public function getVendors(array $filters): array
     {
@@ -104,6 +91,11 @@ class VendorsModel extends BaseModel
         return $this->paginate($sql, $pdo_values);
     }
 
+    /**
+     * Retrieves a single vendor by ID.
+     * @param int $vendor_id The vendor ID.
+     * @return mixed The vendor data or false if not found.
+     */
     function findVendorById(int $vendor_id): mixed
     {
 
