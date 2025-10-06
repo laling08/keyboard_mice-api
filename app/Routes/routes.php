@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 use App\Controllers\AboutController;
+use App\Controllers\SwitchesController;
 use App\Controllers\VendorsController;
 use App\Helpers\DateTimeHelper;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-
+use Slim\Routing\Route;
 
 return static function (Slim\App $app): void { //! add your routes within this function
 
@@ -20,12 +21,18 @@ return static function (Slim\App $app): void { //! add your routes within this f
     //* ROUTE: GET /players
     //$app->get('/players', [PlayersController::class, 'handleGetPlayers']);
 
-    //TODO: Expose the /vendors as a COLLECTION resource (resource of the same type!!!)
-    //* ROUTE: GET /vendors List of vendors
+    // ========================================
+    // VENDOR RESOURCES
+    // ========================================
+
+    //* ROUTE: GET /vendors
     $app->get('/vendors', [VendorsController::class, 'handleGetVendors']);
 
-    //* GET /vendors/{vendor_id}
+    //* ROUTE: GET /vendors/{vendor_id}
     $app->get('/vendors/{vendor_id}', [VendorsController::class, 'handleGetVendorById']);
+
+    //* ROUTE: GET vendors/{vendors_id}/switches
+    $app->get('/vendors/{vendor_id}/switches', [SwitchesController::class, 'handleGetSwitchesByVendorId']);
 
     //* ROUTE: GET /ping
     $app->get('/ping', function (Request $request, Response $response, $args) {
