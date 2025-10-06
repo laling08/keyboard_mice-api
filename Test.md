@@ -43,7 +43,7 @@ GET http://localhost/hw1/vendors?avg_price_min=100&avg_price_max=150
 ```
 ![alt text](image-5.png)
 
-** With Pagination **
+**With Pagination**
 ```
 GET http://localhost/hw1/vendors?page=1&page_size=10
 ```
@@ -112,7 +112,7 @@ Response:
 }
 ```
 
-** Combined **
+**Combined**
 ```
 GET http://localhost/hw1/vendors?country=Germany&founded_after=1990&page=1&page_size=5
 ```
