@@ -32,7 +32,7 @@ class SwitchesModel extends BaseModel
                 INNER JOIN vendors v ON s.vendor_id = v.vendor_id
                 WHERE s.vendor_id = :vendor_id";
 
-        $pdo_values = ["vendor_id => $vendor_id"];
+        $pdo_values = ["vendor_id" => $vendor_id];
 
         //* Filter by switch type
         if (!empty($filters["type"])) {

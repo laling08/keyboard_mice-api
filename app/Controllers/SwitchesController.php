@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types=1);
+declare(strict_types=1);
 
 namespace App\Controllers;
 
@@ -31,12 +31,12 @@ class SwitchesController extends BaseController
         Request $request,
         Response $response,
         array $uri_args
-    ) : Response {
+    ): Response {
         //* Extract vendor ID from URI.
         $vendor_id = (int) $uri_args["vendor_id"];
 
         //* Get filter parameters from query string.
-        $filters = $$request->getQueryParams();
+        $filters = $request->getQueryParams();
 
         //* Fetch switches for this vendor.
         $result = $this->switches_model->getSwitchesByVendorId($vendor_id, $filters);
