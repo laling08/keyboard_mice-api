@@ -140,3 +140,37 @@ Response:
   ]
 }
 ```
+---
+## 2. Vendor Singleton
+**Description:** Get a specific vendor
+
+```
+GET http://localhost/hw1/vendors/1
+```
+Response:
+```json
+{
+  "vendor_id": 1,
+  "name": "Cherry Corporation",
+  "country": "Germany",
+  "founded_year": 1953,
+  "website": "https://www.cherry.de",
+  "headquarters": "Auerbach, Germany"
+}
+```
+
+
+```
+GET http://localhost/hw1/vendors/5
+```
+Response:
+```json
+{
+  "vendor_id": 5,
+  "name": "Razer",
+  "country": "Singapore",
+  "founded_year": 2005,
+  "website": "https://www.razer.com",
+  "headquarters": "Irvine, USA"
+}
+```
