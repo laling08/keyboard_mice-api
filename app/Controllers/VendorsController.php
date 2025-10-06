@@ -32,36 +32,36 @@ class VendorsController extends BaseController
     }
 
     /**
-     * Handles GET /vendors/{vendor_id}.
-     * Returns a single vendor by ID.
+     * Handles GET /vendors/{vendor_id}
+     * Returns a single vendor by ID
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The HTTP Request.
-     * @param \Psr\Http\Message\ResponseInterface $response The HTTP Response.
-     * @param array $uri_args URI parameters including vendor_id.
-     * @return void JSON response with vendor data or error.
+     * @param Request $request The HTTP request
+     * @param Response $response The HTTP response
+     * @param array $uri_args URI parameters including vendor_id
+     * @return Response JSON response with vendor data or error
      */
-    public function handleGetVendorsByd(
+    public function handleGetVendorById(
         Request $request,
         Response $response,
         array $uri_args
-    ) : Response {
-        //* Get vendor ID from URI and cast to integer
-        $vendor_id = (int) $uri_args["vendors_id"];
+    ): Response {
+        // Get vendor ID from URI and cast to integer
+        $vendor_id = (int) $uri_args["vendor_id"];
 
-        //* Fetch vendor from database
+        // Fetch vendor from database
         $vendor = $this->vendors_model->findVendorById($vendor_id);
 
-        //* Handle not found case
+        // Handle not found case
         if ($vendor === false) {
             $error = [
                 "status" => "error",
                 "code" => 404,
-                "message" => "Vendor not found with ID:" . $vendor_id
+                "message" => "Vendor not found with ID: " . $vendor_id
             ];
             return $this->renderJson($response, $error, 404);
         }
 
-        //* Return success response
+        // Return success response
         return $this->renderJson($response, $vendor);
     }
 }
