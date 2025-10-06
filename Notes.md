@@ -95,9 +95,9 @@ function getVendor(int $id): array {
 
 **2. Namespaces** (Organize code into logical groups)
 ```php
-namespace App\Controllers; // This file belongs to Controllers namespace
+namespace AppControllers; // This file belongs to Controllers namespace
 
-use App\Domain\Models\VendorsModel; // Import from another namespace
+use AppDomainModelsVendorsModel; // Import from another namespace
 ```
 
 **3. Arrays in PHP**
@@ -134,7 +134,7 @@ Slim is a PHP micro-framework for building web applications and APIs. It handles
 
 ### How Routing Works
 
-```php
+`\`\`php
 // In routes.php
 $app->get('/vendors', [VendorsController::class, 'handleGetVendors']);
 //       ↑           ↑                                ↑
@@ -475,6 +475,389 @@ public function getSwitchesByVendorId(int $vendor_id): mixed
 }
 ```
 
+### Complete Implementation Example: `/vendors/{vendor_id}/switches`
+
+Let's walk through the **complete implementation** of this sub-collection endpoint that follows your teacher's pattern exactly.
+
+#### Location of Implementation
+
+- **Controller**: `app/Controllers/SwitchesController.php` (method: `handleGetSwitchesByVendorId`)
+- **Model**: `app/Domain/Models/SwitchesModel.php` (method: `getSwitchesByVendorId`)
+- **Route**: Defined in `app/Routes/routes.php`
+
+#### The Controller Method
+
+```php
+/**
+ * Handles GET /vendors/{vendor_id}/switches
+ * Returns switches manufactured by a specific vendor with optional filters
+ * 
+ * @param Request $request The HTTP request
+ * @param Response $response The HTTP response
+ * @param array $uri_args URI parameters including vendor_id
+ * @return Response JSON response with vendor, meta, and switches
+ */
+public function handleGetSwitchesByVendorId(
+    Request $request,
+    Response $response,
+    array $uri_args
+): Response {
+    // Extract vendor ID from URI
+    $vendor_id = (int) $uri_args["vendor_id"];
+    
+    // Get filter parameters from query string
+    $filters = $request->getQueryParams();
+    
+    // Call model method (implements three-step pattern)
+    $result = $this->switches_model->getSwitchesByVendorId($vendor_id, $filters);
+    
+    // Handle case where vendor doesn't exist
+    if ($result === false) {
+        $error = [
+            "status" => "error",
+            "code" => 404,
+            "message" => "Vendor not found with ID: " . $vendor_id
+        ];
+        return $this->renderJson($response, $error, 404);
+    }
+    
+    // Return successful response
+    return $this->renderJson($response, $result);
+}
+```
+
+**What's happening here:**
+1. Extract the `vendor_id` from the URL (e.g., `/vendors/5/switches` → `vendor_id = 5`)
+2. Get any filter parameters from the query string (e.g., `?type=Linear&actuation_force.min=45`)
+3. Call the model method that implements the three-step pattern
+4. Handle the case where the vendor doesn't exist (return 404)
+5. Return the structured response with vendor, meta, and switches
+
+#### The Model Method (Three-Step Pattern)
+
+```php
+/**
+ * Gets switches manufactured by a specific vendor with optional filters
+ * Implements the three-step sub-collection pattern
+ * 
+ * @param int $vendor_id The vendor ID
+ * @param array $filters Optional filters for switches
+ * @return mixed Array with vendor, meta, and switches, or false if vendor not found
+ */
+public function getSwitchesByVendorId(int $vendor_id, array $filters = []): mixed
+{
+    // ============================================================
+    // STEP 1: Fetch the parent resource (vendor)
+    // ============================================================
+    // This verifies the vendor exists and provides context
+    $vendor = $this->vendors_model->findVendorById($vendor_id);
+    
+    if ($vendor === false) {
+        return false; // Vendor doesn't exist
+    }
+    
+    // ============================================================
+    // STEP 2: Fetch the sub-collection items (switches)
+    // ============================================================
+    // Build the SQL query with filters
+    $sql = "SELECT s.*, v.name as vendor_name
+            FROM switches s
+            INNER JOIN vendors v ON s.vendor_id = v.vendor_id
+            WHERE s.vendor_id = :vendor_id";
+    
+    $pdo_values = ["vendor_id" => $vendor_id];
+    
+    // Apply filters dynamically
+    
+    // Filter by switch type (Linear, Tactile, Clicky)
+    if (!empty($filters["type"])) {
+        $sql .= " AND s.type = :type";
+        $pdo_values["type"] = $filters["type"];
+    }
+    
+    // Filter by actuation force range
+    if (!empty($filters["actuation_force_min"])) {
+        $sql .= " AND s.actuation_force >= :actuation_force_min";
+        $pdo_values["actuation_force_min"] = $filters["actuation_force_min"];
+    }
+    
+    if (!empty($filters["actuation_force_max"])) {
+        $sql .= " AND s.actuation_force <= :actuation_force_max";
+        $pdo_values["actuation_force_max"] = $filters["actuation_force_max"];
+    }
+    
+    // Filter by travel distance range
+    if (!empty($filters["travel_distance_min"])) {
+        $sql .= " AND s.travel_distance >= :travel_distance_min";
+        $pdo_values["travel_distance_min"] = $filters["travel_distance_min"];
+    }
+    
+    if (!empty($filters["travel_distance_max"])) {
+        $sql .= " AND s.travel_distance <= :travel_distance_max";
+        $pdo_values["travel_distance_max"] = $filters["travel_distance_max"];
+    }
+    
+    // Filter by lifespan minimum
+    if (!empty($filters["lifespan_min"])) {
+        $sql .= " AND s.lifespan >= :lifespan_min";
+        $pdo_values["lifespan_min"] = $filters["lifespan_min"];
+    }
+    
+    // Filter by release date range
+    if (!empty($filters["release_date_after"])) {
+        $sql .= " AND s.release_date >= :release_date_after";
+        $pdo_values["release_date_after"] = $filters["release_date_after"];
+    }
+    
+    if (!empty($filters["release_date_before"])) {
+        $sql .= " AND s.release_date <= :release_date_before";
+        $pdo_values["release_date_before"] = $filters["release_date_before"];
+    }
+    
+    // Execute query with pagination
+    $switches = $this->paginate($sql, $pdo_values);
+    
+    // ============================================================
+    // STEP 3: Structure the response
+    // ============================================================
+    // Combine parent, pagination meta, and children
+    $results = [
+        "vendor" => $vendor,              // Parent resource
+        "meta" => $switches["meta"],      // Pagination info
+        "switches" => $switches["data"]   // Sub-collection items
+    ];
+    
+    return $results;
+}
+```
+
+**Breaking Down Each Step:**
+
+**STEP 1: Fetch Parent Resource**
+```php
+$vendor = $this->vendors_model->findVendorById($vendor_id);
+
+if ($vendor === false) {
+    return false; // Vendor doesn't exist
+}
+```
+- We first check if the vendor exists
+- If not, we return `false` which the controller converts to a 404 error
+- This prevents showing switches for a non-existent vendor
+
+**STEP 2: Fetch Sub-Collection with Filters**
+```php
+$sql = "SELECT s.*, v.name as vendor_name
+        FROM switches s
+        INNER JOIN vendors v ON s.vendor_id = v.vendor_id
+        WHERE s.vendor_id = :vendor_id";
+
+$pdo_values = ["vendor_id" => $vendor_id];
+
+// Add filters dynamically
+if (!empty($filters["type"])) {
+    $sql .= " AND s.type = :type";
+    $pdo_values["type"] = $filters["type"];
+}
+// ... more filters ...
+
+$switches = $this->paginate($sql, $pdo_values);
+```
+- Start with base query that gets switches for this vendor
+- Dynamically add WHERE clauses based on provided filters
+- Use prepared statements (`:parameter` syntax) for security
+- Call `paginate()` to handle pagination automatically
+
+**STEP 3: Structure Response**
+```php
+$results = [
+    "vendor" => $vendor,              // Parent context
+    "meta" => $switches["meta"],      // Pagination info
+    "switches" => $switches["data"]   // The actual switches
+];
+
+return $results;
+```
+- Combine all three pieces into one structured response
+- This is the exact pattern your teacher specified
+
+#### Understanding the Filters
+
+**1. Type Filter (Exact Match)**
+```php
+// Query: GET /vendors/5/switches?type=Linear
+if (!empty($filters["type"])) {
+    $sql .= " AND s.type = :type";
+    $pdo_values["type"] = $filters["type"];
+}
+```
+- Matches exact switch type: Linear, Tactile, or Clicky
+
+**2. Actuation Force Range**
+```php
+// Query: GET /vendors/5/switches?actuation_force_min=45&actuation_force_max=60
+if (!empty($filters["actuation_force_min"])) {
+    $sql .= " AND s.actuation_force >= :actuation_force_min";
+    $pdo_values["actuation_force_min"] = $filters["actuation_force_min"];
+}
+
+if (!empty($filters["actuation_force_max"])) {
+    $sql .= " AND s.actuation_force <= :actuation_force_max";
+    $pdo_values["actuation_force_max"] = $filters["actuation_force_max"];
+}
+```
+- Finds switches with actuation force between min and max values
+- Can use just `.min`, just `.max`, or both together
+
+**3. Travel Distance Range**
+```php
+// Query: GET /vendors/5/switches?travel_distance_min=3.5&travel_distance_max=4.0
+if (!empty($filters["travel_distance_min"])) {
+    $sql .= " AND s.travel_distance >= :travel_distance_min";
+    $pdo_values["travel_distance_min"] = $filters["travel_distance_min"];
+}
+```
+- Filters by how far the switch travels when pressed (in mm)
+
+**4. Lifespan Minimum**
+```php
+// Query: GET /vendors/5/switches?lifespan_min=50000000
+if (!empty($filters["lifespan_min"])) {
+    $sql .= " AND s.lifespan >= :lifespan_min";
+    $pdo_values["lifespan_min"] = $filters["lifespan_min"];
+}
+```
+- Finds switches rated for at least X keystrokes
+
+**5. Release Date Range**
+```php
+// Query: GET /vendors/5/switches?release_date_after=2020-01-01&release_date_before=2023-12-31
+if (!empty($filters["release_date_after"])) {
+    $sql .= " AND s.release_date >= :release_date_after";
+    $pdo_values["release_date_after"] = $filters["release_date_after"];
+}
+```
+- Filters switches released within a date range
+
+#### Example Requests and Responses
+
+**Request 1: Get all switches by vendor**
+```
+GET http://localhost/km-api/vendors/5/switches
+```
+
+**Response:**
+```json
+{
+  "vendor": {
+    "vendor_id": 5,
+    "name": "Cherry",
+    "country": "Germany",
+    "founded_year": 1953
+  },
+  "meta": {
+    "total": 15,
+    "current_page": 1,
+    "page_size": 10,
+    "total_pages": 2
+  },
+  "switches": [
+    {
+      "switch_id": 1,
+      "name": "MX Red",
+      "type": "Linear",
+      "actuation_force": 45,
+      "travel_distance": 4.0,
+      "lifespan": 50000000,
+      "release_date": "1984-01-01",
+      "vendor_name": "Cherry"
+    },
+    {
+      "switch_id": 2,
+      "name": "MX Blue",
+      "type": "Clicky",
+      "actuation_force": 50,
+      "travel_distance": 4.0,
+      "lifespan": 50000000,
+      "release_date": "1984-01-01",
+      "vendor_name": "Cherry"
+    }
+    // ... more switches
+  ]
+}
+```
+
+**Request 2: Filter by type and actuation force**
+```
+GET http://localhost/km-api/vendors/5/switches?type=Linear&actuation_force_min=40&actuation_force_max=50
+```
+
+**Response:**
+```json
+{
+  "vendor": {
+    "vendor_id": 5,
+    "name": "Cherry",
+    "country": "Germany"
+  },
+  "meta": {
+    "total": 3,
+    "current_page": 1,
+    "page_size": 10,
+    "total_pages": 1
+  },
+  "switches": [
+    {
+      "switch_id": 1,
+      "name": "MX Red",
+      "type": "Linear",
+      "actuation_force": 45,
+      "travel_distance": 4.0
+    },
+    {
+      "switch_id": 8,
+      "name": "MX Black",
+      "type": "Linear",
+      "actuation_force": 50,
+      "travel_distance": 4.0
+    }
+  ]
+}
+```
+
+**Request 3: Vendor doesn't exist**
+```
+GET http://localhost/km-api/vendors/999/switches
+```
+
+**Response (404):**
+```json
+{
+  "status": "error",
+  "code": 404,
+  "message": "Vendor not found with ID: 999"
+}
+```
+
+#### Key Takeaways
+
+1. **Three-Step Pattern is Mandatory**: Always fetch parent, then children, then structure response
+2. **Filters are Optional**: All filters use `!empty()` check so they're only applied if provided
+3. **Prepared Statements**: Always use `:parameter` syntax to prevent SQL injection
+4. **Error Handling**: Check if parent exists before fetching children
+5. **Consistent Structure**: All sub-collections follow the same response format
+
+#### Testing This Endpoint
+
+Use Thunder Client to test these scenarios:
+
+1. **Basic request**: `/vendors/5/switches`
+2. **With type filter**: `/vendors/5/switches?type=Linear`
+3. **With range filter**: `/vendors/5/switches?actuation_force_min=45&actuation_force_max=60`
+4. **Multiple filters**: `/vendors/5/switches?type=Tactile&lifespan_min=50000000`
+5. **With pagination**: `/vendors/5/switches?page=2&page_size=5`
+6. **Non-existent vendor**: `/vendors/999/switches` (should return 404)
+
 ---
 
 ## Filter Implementation
@@ -508,7 +891,7 @@ These filters require aggregation (counting related items).
 
 **Example:** Find vendors who make at least 10 switches
 
-\`\`\`php
+```php
 public function getVendors(array $filters): array
 {
     $sql = "SELECT v.*, COUNT(s.switch_id) as switch_count
