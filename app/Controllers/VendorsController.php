@@ -23,11 +23,45 @@ class VendorsController extends BaseController
     {
         // TODO: Get a list of zero or more vendor resources that match the request's filtering criteria
 
-        // Get filters from query string.
+        //* Get filters from query string.
         $filters = $request->getQueryParams();
-        // Fetch vendors from database.
+        //* Fetch vendors from database.
         $vendors = $this->vendors_model->getVendors($filters);
-        // Return JSON response.
+        //* Return JSON response.
         return $this->renderJson($response, $vendors);
+    }
+
+    /**
+     * Handles GET /vendors/{vendor_id}.
+     * Returns a single vendor by ID.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request The HTTP Request.
+     * @param \Psr\Http\Message\ResponseInterface $response The HTTP Response.
+     * @param array $uri_args URI parameters including vendor_id.
+     * @return void JSON response with vendor data or error.
+     */
+    public function handleGetVendorsByd(
+        Request $request,
+        Response $response,
+        array $uri_args
+    ) : Response {
+        //* Get vendor ID from URI and cast to integer
+        $vendor_id = (int) $uri_args["vendors_id"];
+
+        //* Fetch vendor from database
+        $vendor = $this->vendors_model->findVendorById($vendor_id);
+
+        //* Handle not found case
+        if ($vendor === false) {
+            $error = [
+                "status" => "error",
+                "code" => 404,
+                "message" => "Vendor not found with ID:" . $vendor_id
+            ];
+            return $this->renderJson($response, $error, 404);
+        }
+
+        //* Return success response
+        return $this->renderJson($response, $vendor);
     }
 }
