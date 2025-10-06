@@ -45,10 +45,10 @@ class VendorsController extends BaseController
         Response $response,
         array $uri_args
     ): Response {
-        // Get vendor ID from URI and cast to integer
+        //* Get vendor ID from URI and cast to integer
         $vendor_id = (int) $uri_args["vendor_id"];
 
-        // Fetch vendor from database
+        //* Fetch vendor from database
         $vendor = $this->vendors_model->findVendorById($vendor_id);
 
         // Handle not found case
@@ -61,7 +61,7 @@ class VendorsController extends BaseController
             return $this->renderJson($response, $error, 404);
         }
 
-        // Return success response
+        //* Return success response
         return $this->renderJson($response, $vendor);
     }
 }
