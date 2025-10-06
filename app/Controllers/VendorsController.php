@@ -31,7 +31,7 @@ class VendorsController extends BaseController
 
 
     }
-    
+
 
     //* ROUTE: GET /vendors/{vendor_id}
     public function handleGetVendorById(
@@ -74,7 +74,7 @@ class VendorsController extends BaseController
             );
         }
         //? HAPPY PATH:
-        return $this->renderJson($response, $vendor)
+        return $this->renderJson($response, $vendor);
         // End of callback
         //* we already have this in the base controller lol
         // $payload = json_encode($vendor);
