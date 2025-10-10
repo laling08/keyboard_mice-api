@@ -25,7 +25,7 @@ class KeyboardsModel extends BaseModel
      */
     public function getKeyboards (array $filters) : array
     {
-        $sql = "SELECT k.*, v.name as vendor_name, s.name as switch_name, l.bane as layout_name
+        $sql = "SELECT k.*, v.name as vendor_name, s.name as switch_name, l.name as layout_name
                 FROM keyboards k
                 INNER JOIN vendors v ON k.vendor_id = v.vendor_id
                 INNER JOIN switches s ON k.switch_id = s.switch_id
