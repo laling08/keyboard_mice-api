@@ -75,6 +75,11 @@ class KeyboardsModel extends BaseModel
 
     }
 
+    /**
+     * Retrieves a single keyboard by ID
+     * @param int $keyboard_id The keyboard ID
+     * @return mixed The keyboard data or false if not found
+     */
     public function findKeyboardById (int $keyboard_id) : mixed
     {
         $sql = "SELECT k.*, v.name as vendor_name, s.name as switch_name, l.name as layout_name
