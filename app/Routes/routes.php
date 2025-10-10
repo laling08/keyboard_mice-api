@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Controllers\AboutController;
+use App\Controllers\KeyboardsController;
 use App\Controllers\SwitchesController;
 use App\Controllers\VendorsController;
 use App\Helpers\DateTimeHelper;
@@ -33,6 +34,15 @@ return static function (Slim\App $app): void { //! add your routes within this f
 
     //* ROUTE: GET vendors/{vendors_id}/switches
     $app->get('/vendors/{vendor_id}/switches', [SwitchesController::class, 'handleGetSwitchesByVendorId']);
+
+    //========================================
+    // KEYBOARD RESOURCES
+    // ========================================
+    //* ROUTE: GET /keyboards
+    $app->get('/keyboards', [KeyboardsController::class, 'handleGetKeyboards']);
+
+    //* ROUTE: GET keyboards/{keyboard_id}
+    $app->get('/keyboards/{keyboard_id}', [KeyboardsController::class, 'handleGetKeyboardById']);
 
     //* ROUTE: GET /ping
     $app->get('/ping', function (Request $request, Response $response, $args) {
