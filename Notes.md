@@ -134,7 +134,7 @@ Slim is a PHP micro-framework for building web applications and APIs. It handles
 
 ### How Routing Works
 
-`\`\`php
+```php
 // In routes.php
 $app->get('/vendors', [VendorsController::class, 'handleGetVendors']);
 //       ↑           ↑                                ↑
