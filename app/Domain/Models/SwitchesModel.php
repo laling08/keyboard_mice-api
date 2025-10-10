@@ -13,11 +13,13 @@ use App\Helpers\Core\PDOService;
  */
 class SwitchesModel extends BaseModel
 {
-    public function __construct(private PDOService $pdo) {
+    public function __construct(private PDOService $pdo)
+    {
         parent::__construct($pdo);
     }
 
-    public function getSwitchesByVendorId(int $vendor_id, array $filters) : mixed {
+    public function getSwitchesByVendorId(int $vendor_id, array $filters): mixed
+    {
         //* STEP 1: Fetch the parent vendor resource
         $vendor_sql = "SELECT * FROM vendors WHERE vendor_id = :vendor_id";
         $vendor = $this->fetchSingle($vendor_sql, ["vendor_id" => $vendor_id]);
