@@ -1173,3 +1173,774 @@ Response:
   "switches": []
 }
 ```
+---
+## 4. Keyboards Collection
+### GET /keyboards
+
+**Description:** Get all keyboards
+```json
+{
+  "meta": {
+    "total": 9,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 2
+  },
+  "data": [
+    {
+      "keyboard_id": 1,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 1,
+      "name": "MX Board 3.0S",
+      "release_date": "2018-03-15",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1200.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "layout_name": "Full Size"
+    },
+    {
+      "keyboard_id": 77,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 2,
+      "name": "MX Board 3.0S RGB",
+      "release_date": "2019-11-12",
+      "price": "159.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1280.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "layout_name": "Full Size"
+    },
+    {
+      "keyboard_id": 2,
+      "vendor_id": 1,
+      "switch_id": 2,
+      "layout_id": 2,
+      "name": "MX Board 8.0",
+      "release_date": "2017-09-20",
+      "price": "179.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1450.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Black",
+      "layout_name": "TKL"
+    },
+    {
+      "keyboard_id": 3,
+      "vendor_id": 1,
+      "switch_id": 3,
+      "layout_id": 1,
+      "name": "MX Board 1.0 TKL",
+      "release_date": "2019-06-12",
+      "price": "99.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "950.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Brown",
+      "layout_name": "75%"
+    },
+    {
+      "keyboard_id": 4,
+      "vendor_id": 1,
+      "switch_id": 4,
+      "layout_id": 3,
+      "name": "MX Board 2.0S",
+      "release_date": "2020-01-08",
+      "price": "149.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1100.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Blue",
+      "layout_name": "65%"
+    }
+  ]
+}
+```
+
+**With Filters:**
+
+```
+GET http://localhost/hw1/keyboards?switch_type=Linear
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 7,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 2
+  },
+  "data": [
+    {
+      "keyboard_id": 1,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 1,
+      "name": "MX Board 3.0S",
+      "release_date": "2018-03-15",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1200.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "layout_name": "Full Size"
+    },
+    {
+      "keyboard_id": 77,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 2,
+      "name": "MX Board 3.0S RGB",
+      "release_date": "2019-11-12",
+      "price": "159.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1280.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "layout_name": "Full Size"
+    },
+    {
+      "keyboard_id": 2,
+      "vendor_id": 1,
+      "switch_id": 2,
+      "layout_id": 2,
+      "name": "MX Board 8.0",
+      "release_date": "2017-09-20",
+      "price": "179.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1450.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Black",
+      "layout_name": "TKL"
+    },
+    {
+      "keyboard_id": 5,
+      "vendor_id": 1,
+      "switch_id": 7,
+      "layout_id": 5,
+      "name": "MX Keys Mini",
+      "release_date": "2021-08-25",
+      "price": "199.99",
+      "connectivity": "Wireless",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "750.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Silent Red",
+      "layout_name": "Full Size ISO"
+    },
+    {
+      "keyboard_id": 6,
+      "vendor_id": 2,
+      "switch_id": 11,
+      "layout_id": 5,
+      "name": "Keychron K6",
+      "release_date": "2020-04-15",
+      "price": "79.99",
+      "connectivity": "Both",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "820.00",
+      "vendor_name": "Gateron",
+      "switch_name": "Red",
+      "layout_name": "96%"
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/keyboards?connectivity=Wireless
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 1,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 1
+  },
+  "data": [
+    {
+      "keyboard_id": 5,
+      "vendor_id": 1,
+      "switch_id": 7,
+      "layout_id": 5,
+      "name": "MX Keys Mini",
+      "release_date": "2021-08-25",
+      "price": "199.99",
+      "connectivity": "Wireless",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "750.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Silent Red",
+      "layout_name": "Full Size ISO"
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/keyboards?hot_swappable=true
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 2,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 1
+  },
+  "data": [
+    {
+      "keyboard_id": 6,
+      "vendor_id": 2,
+      "switch_id": 11,
+      "layout_id": 5,
+      "name": "Keychron K6",
+      "release_date": "2020-04-15",
+      "price": "79.99",
+      "connectivity": "Both",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "820.00",
+      "vendor_name": "Gateron",
+      "switch_name": "Red",
+      "layout_name": "96%"
+    },
+    {
+      "keyboard_id": 7,
+      "vendor_id": 2,
+      "switch_id": 12,
+      "layout_id": 4,
+      "name": "Keychron Q1",
+      "release_date": "2021-07-20",
+      "price": "179.99",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "1580.00",
+      "vendor_name": "Gateron",
+      "switch_name": "Black",
+      "layout_name": "Split Ergonomic"
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/keyboards?weight_max=1280.00
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 1,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 1
+  },
+  "data": [
+    {
+      "keyboard_id": 77,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 2,
+      "name": "MX Board 3.0S RGB",
+      "release_date": "2019-11-12",
+      "price": "159.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1280.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "layout_name": "Full Size"
+    }
+  ]
+}
+
+```
+
+```
+GET http://localhost/hw1/keyboards?release_date_after=2020-01-01
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 9,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 2
+  },
+  "data": [
+    {
+      "keyboard_id": 1,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 1,
+      "name": "MX Board 3.0S",
+      "release_date": "2018-03-15",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1200.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "layout_name": "Full Size"
+    },
+    {
+      "keyboard_id": 77,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 2,
+      "name": "MX Board 3.0S RGB",
+      "release_date": "2019-11-12",
+      "price": "159.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1280.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "layout_name": "Full Size"
+    },
+    {
+      "keyboard_id": 2,
+      "vendor_id": 1,
+      "switch_id": 2,
+      "layout_id": 2,
+      "name": "MX Board 8.0",
+      "release_date": "2017-09-20",
+      "price": "179.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1450.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Black",
+      "layout_name": "TKL"
+    },
+    {
+      "keyboard_id": 3,
+      "vendor_id": 1,
+      "switch_id": 3,
+      "layout_id": 1,
+      "name": "MX Board 1.0 TKL",
+      "release_date": "2019-06-12",
+      "price": "99.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "950.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Brown",
+      "layout_name": "75%"
+    },
+    {
+      "keyboard_id": 4,
+      "vendor_id": 1,
+      "switch_id": 4,
+      "layout_id": 3,
+      "name": "MX Board 2.0S",
+      "release_date": "2020-01-08",
+      "price": "149.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1100.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Blue",
+      "layout_name": "65%"
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/keyboards?release_date_before=2023-12-31
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 9,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 2
+  },
+  "data": [
+    {
+      "keyboard_id": 1,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 1,
+      "name": "MX Board 3.0S",
+      "release_date": "2018-03-15",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1200.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "layout_name": "Full Size"
+    },
+    {
+      "keyboard_id": 77,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 2,
+      "name": "MX Board 3.0S RGB",
+      "release_date": "2019-11-12",
+      "price": "159.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1280.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "layout_name": "Full Size"
+    },
+    {
+      "keyboard_id": 2,
+      "vendor_id": 1,
+      "switch_id": 2,
+      "layout_id": 2,
+      "name": "MX Board 8.0",
+      "release_date": "2017-09-20",
+      "price": "179.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1450.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Black",
+      "layout_name": "TKL"
+    },
+    {
+      "keyboard_id": 3,
+      "vendor_id": 1,
+      "switch_id": 3,
+      "layout_id": 1,
+      "name": "MX Board 1.0 TKL",
+      "release_date": "2019-06-12",
+      "price": "99.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "950.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Brown",
+      "layout_name": "75%"
+    },
+    {
+      "keyboard_id": 4,
+      "vendor_id": 1,
+      "switch_id": 4,
+      "layout_id": 3,
+      "name": "MX Board 2.0S",
+      "release_date": "2020-01-08",
+      "price": "149.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1100.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Blue",
+      "layout_name": "65%"
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/km-api/keyboards?pcb_firmware=QMK
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 9,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 2
+  },
+  "data": [
+    {
+      "keyboard_id": 1,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 1,
+      "name": "MX Board 3.0S",
+      "release_date": "2018-03-15",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1200.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "layout_name": "Full Size"
+    },
+    {
+      "keyboard_id": 77,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 2,
+      "name": "MX Board 3.0S RGB",
+      "release_date": "2019-11-12",
+      "price": "159.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1280.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "layout_name": "Full Size"
+    },
+    {
+      "keyboard_id": 2,
+      "vendor_id": 1,
+      "switch_id": 2,
+      "layout_id": 2,
+      "name": "MX Board 8.0",
+      "release_date": "2017-09-20",
+      "price": "179.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1450.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Black",
+      "layout_name": "TKL"
+    },
+    {
+      "keyboard_id": 3,
+      "vendor_id": 1,
+      "switch_id": 3,
+      "layout_id": 1,
+      "name": "MX Board 1.0 TKL",
+      "release_date": "2019-06-12",
+      "price": "99.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "950.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Brown",
+      "layout_name": "75%"
+    },
+    {
+      "keyboard_id": 4,
+      "vendor_id": 1,
+      "switch_id": 4,
+      "layout_id": 3,
+      "name": "MX Board 2.0S",
+      "release_date": "2020-01-08",
+      "price": "149.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1100.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Blue",
+      "layout_name": "65%"
+    }
+  ]
+}
+```
+
+**Combined Filters:**
+```
+GET http://localhost/hw1/keyboards?switch_type=Linear&hot_swappable=true&connectivity=Wired
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 15,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 3
+  },
+  "data": [
+    {
+      "keyboard_id": 7,
+      "vendor_id": 2,
+      "switch_id": 12,
+      "layout_id": 4,
+      "name": "Keychron Q1",
+      "release_date": "2021-07-20",
+      "price": "179.99",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "1580.00",
+      "vendor_name": "Gateron",
+      "switch_name": "Black",
+      "switch_type": "Linear",
+      "layout_name": "65%",
+      "pcb_firmware": null
+    },
+    {
+      "keyboard_id": 8,
+      "vendor_id": 2,
+      "switch_id": 13,
+      "layout_id": 3,
+      "name": "Keychron Q2",
+      "release_date": "2021-11-15",
+      "price": "189.99",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "1420.00",
+      "vendor_name": "Gateron",
+      "switch_name": "Yellow",
+      "switch_type": "Linear",
+      "layout_name": "75%",
+      "pcb_firmware": null
+    },
+    {
+      "keyboard_id": 29,
+      "vendor_id": 6,
+      "switch_id": 47,
+      "layout_id": 2,
+      "name": "G Pro X",
+      "release_date": "2019-08-15",
+      "price": "149.99",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "980.00",
+      "vendor_name": "Logitech",
+      "switch_name": "Phoenix",
+      "switch_type": "Linear",
+      "layout_name": "TKL",
+      "pcb_firmware": "Proprietary"
+    },
+    {
+      "keyboard_id": 33,
+      "vendor_id": 7,
+      "switch_id": 51,
+      "layout_id": 3,
+      "name": "Think6.5 V2",
+      "release_date": "2021-04-12",
+      "price": "385.00",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "1650.00",
+      "vendor_name": "Zealios",
+      "switch_name": "Yellow",
+      "switch_type": "Linear",
+      "layout_name": "75%",
+      "pcb_firmware": null
+    },
+    {
+      "keyboard_id": 35,
+      "vendor_id": 7,
+      "switch_id": 53,
+      "layout_id": 2,
+      "name": "Polaris75",
+      "release_date": "2022-01-18",
+      "price": "350.00",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "1520.00",
+      "vendor_name": "Zealios",
+      "switch_name": "Red",
+      "switch_type": "Linear",
+      "layout_name": "TKL",
+      "pcb_firmware": "QMK"
+    }
+  ]
+}
+```
+
+## 5. Keyboard Singleton
+### GET /keyboards/{keyboard_id}
+
+**Description:** Get a specific keyboard
+
+**Request:**
+```
+GET http://localhost/hw1/keyboards/1
+```
+Response: 
+```json
+{
+  "keyboard_id": 1,
+  "vendor_id": 1,
+  "switch_id": 1,
+  "layout_id": 1,
+  "name": "MX Board 3.0S",
+  "release_date": "2018-03-15",
+  "price": "129.99",
+  "connectivity": "Wired",
+  "hot_swappable": 0,
+  "case_material": "Plastic",
+  "weight": "1200.00",
+  "vendor_name": "Cherry Corporation",
+  "switch_name": "MX Red",
+  "layout_name": "Full Size"
+}
+```
+
+```
+GET http://localhost/hw1/keyboards/10
+```
+```json
+{
+  "keyboard_id": 10,
+  "vendor_id": 2,
+  "switch_id": 15,
+  "layout_id": 1,
+  "name": "Keychron Q5",
+  "release_date": "2022-06-05",
+  "price": "219.99",
+  "connectivity": "Wired",
+  "hot_swappable": 1,
+  "case_material": "Aluminum",
+  "weight": "1950.00",
+  "vendor_name": "Gateron",
+  "switch_name": "Blue",
+  "layout_name": "Full Size"
+}
+```
