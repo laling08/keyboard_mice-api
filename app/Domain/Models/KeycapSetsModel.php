@@ -18,6 +18,15 @@ class KeycapSetsModel extends BaseModel
         parent::__construct($pdo);
     }
 
+
+    /**
+     * Retrieves keycap sets compatible with a specific layout.
+     * This is a sub-collection of the layout resource.
+     *
+     * @param int $layout_id The layout ID
+     * @param array $filters Additional filter parameters
+     * @return mixed Array with the layout, meta, and keycap_sets or false if layout not found.
+     */
     public function getKeycapSetsByLayoutId (int $layout_id, array $filters) : mixed
     {
         //* STEP 1: Fetch the parent layout resource.

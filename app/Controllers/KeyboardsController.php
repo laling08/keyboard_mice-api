@@ -32,6 +32,15 @@ class KeyboardsController extends BaseController
 
     }
 
+    /**
+     * Handles GET /keyboards/{keyboard_id}
+     * Returns a single keyboard by ID
+     *
+     * @param Request $request The HTTP request
+     * @param Response $response The HTTP response
+     * @param array $uri_args URI parameters including keyboard_id
+     * @return Response JSON response with keyboard data or error
+     */
     public function handleGetKeyboardById (
         Request $request,
         Response $response,
@@ -56,5 +65,4 @@ class KeyboardsController extends BaseController
 
         return $this->renderJson($response, $keyboard);
     }
-
 }
