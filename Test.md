@@ -1944,3 +1944,52 @@ GET http://localhost/hw1/keyboards/10
   "layout_name": "Full Size"
 }
 ```
+
+## 6. Layout Keyboards Sub-Collection
+### GET /layouts/{layout_id}/keyboards
+**Description:** Get keyboards that use a specific layout
+
+**Basic Request:**
+```
+GET http://localhost/hw1/layouts/1/keyboards
+```
+Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 0,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 0
+  },
+  "keyboards": []
+}
+```
+
+**With Filters:**
+```
+GET http://localhost/km-api/layouts/1/keyboards?switch_type=Linear
+```
+Response:
+
+```
+GET http://localhost/km-api/layouts/1/keyboards?price_min=100&price_max=300
+```
+Response:
+
+
+```
+GET http://localhost/km-api/layouts/1/keyboards?connectivity=Wireless
+```
+Response:
+
+
+
