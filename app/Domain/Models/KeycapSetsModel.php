@@ -38,7 +38,7 @@ class KeycapSetsModel extends BaseModel
         }
 
         //* STEP 2: Fetch the keycap sets sub-collection
-        $sql = "SELECT ks.
+         $sql = "SELECT ks.*
                 FROM keycap_sets ks
                 INNER JOIN keycap_compatibility kc ON ks.keycap_id = kc.keycap_id
                 WHERE kc.layout_id = :layout_id";
@@ -48,13 +48,13 @@ class KeycapSetsModel extends BaseModel
         // Filter by material
         if (!empty($filters["material"])) {
             $sql .= " AND ks.material = :material";
-            $pdo_values["material"] = $filters["profile"];
+            $pdo_values["material"] = $filters["material"];
         }
 
         // Filter by profile
         if (!empty($filters["profile"])) {
             $sql .= " AND ks.profile = :profile";
-            $pdo_value ["profile"] = $filters["profile"];
+            $pdo_values["profile"] = $filters["profile"];
         }
 
         // Filter by price maximum
