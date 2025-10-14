@@ -1,3 +1,6 @@
+# API Description
+This API is an assignment that I did for my Web Services Course in my Computer Science Program. In here I implemented a REST-based data exchange web service using the Slim framework, deployed on an Apache server through Wampoon with a provided MySQL database about mechanical keyboards and gaming mice. The API exposes various resources such as vendors, switches, keyboards, mice, and layouts, supporting filtering, sorting, pagination, and proper error handling. All responses are returned in JSON format with appropriate HTTP status codes. The project follows a structured organization with controllers, models, and exceptions, includes PHPDoc documentation, and was tested using Thunder Client in VS Code.
+
 - [Starter Template](#starter-template)
   - [How Do I Use/Deploy this Template?](#how-do-i-usedeploy-this-template)
   - [How Do I Configure My Database Connection?](#how-do-i-configure-my-database-connection)
