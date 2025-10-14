@@ -102,8 +102,17 @@ class KeyboardsModel extends BaseModel
         return $this->fetchSingle($sql, ["keyboard_id" => $keyboard_id]);
     }
 
-    public function getKeyboardsByLayoutId (int $layout_id, array $filters) : mixed {
-        //* STEP 1: Fetch the parent layout resource
+   /**
+    * Retrieves keyboards that use a specific layout.
+    * This is a sub-collection of the layout resource.
+    *
+    * @param int $layout_id The layout ID
+    * @param array $filters Additional Filters
+    * @return mixed Array with layout, meta, and keyboards or false if layout not found
+    */
+   public function getKeyboardsByLayoutId(int $layout_id, array $filters): mixed
+    {
+        // STEP 1: Fetch the parent layout resource
         $layout_sql = "SELECT * FROM layouts WHERE layout_id = :layout_id";
         $layout = $this->fetchSingle($layout_sql, ["layout_id" => $layout_id]);
 
@@ -111,8 +120,8 @@ class KeyboardsModel extends BaseModel
             return false;
         }
 
-        //* STEP 2: Fetch the keyboards sub-collection
-        $sql = "SELECT k. *,
+        // STEP 2: Fetch the keyboards sub-collection
+        $sql = "SELECT k.*,
                        v.name as vendor_name,
                        s.name as switch_name,
                        s.type as switch_type
@@ -121,15 +130,21 @@ class KeyboardsModel extends BaseModel
                 INNER JOIN switches s ON k.switch_id = s.switch_id
                 WHERE k.layout_id = :layout_id";
 
-        $pdo_values = ["layout_id => $layout_id"];
+        $pdo_values = ["layout_id" => $layout_id];
 
+        // Apply additional filters
         if (!empty($filters["switch_type"])) {
             $sql .= " AND s.type = :switch_type";
             $pdo_values["switch_type"] = $filters["switch_type"];
         }
 
+        if (!empty($filters["price_min"])) {
+            $sql .= " AND k.price >= :price_min";
+            $pdo_values["price_min"] = $filters["price_min"];
+        }
+
         if (!empty($filters["price_max"])) {
-            $sql .= " AND k.price <= price_max";
+            $sql .= " AND k.price <= :price_max";
             $pdo_values["price_max"] = $filters["price_max"];
         }
 
@@ -140,13 +155,12 @@ class KeyboardsModel extends BaseModel
 
         $keyboards = $this->paginate($sql, $pdo_values);
 
-        //* STEP 3: Structure the response
+        // STEP 3: Structure the response
         $results = [
             "layout" => $layout,
             "meta" => $keyboards["meta"],
             "keyboards" => $keyboards["data"]
         ];
-
         return $results;
     }
 }
