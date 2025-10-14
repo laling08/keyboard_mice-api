@@ -1178,6 +1178,12 @@ Response:
 ### GET /keyboards
 
 **Description:** Get all keyboards
+
+**Basic Request:**
+```
+GET http://localhost/hw1/keyboards
+```
+Response:
 ```json
 {
   "meta": {
@@ -1688,7 +1694,7 @@ Response:
 ```
 
 ```
-GET http://localhost/km-api/keyboards?pcb_firmware=QMK
+GET http://localhost/hw1/keyboards?pcb_firmware=QMK
 ```
 Response:
 ```json
@@ -1976,20 +1982,583 @@ Response:
 
 **With Filters:**
 ```
-GET http://localhost/km-api/layouts/1/keyboards?switch_type=Linear
+GET http://localhost/hw1/layouts/1/keyboards?switch_type=Linear
 ```
 Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 8,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 2
+  },
+  "keyboards": [
+    {
+      "keyboard_id": 1,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 1,
+      "name": "MX Board 3.0S",
+      "release_date": "2018-03-15",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1200.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 14,
+      "vendor_id": 3,
+      "switch_id": 22,
+      "layout_id": 1,
+      "name": "Ducky One 2",
+      "release_date": "2018-08-30",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1180.00",
+      "vendor_name": "Kailh",
+      "switch_name": "Ink Black",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 22,
+      "vendor_id": 5,
+      "switch_id": 40,
+      "layout_id": 1,
+      "name": "BlackWidow V3",
+      "release_date": "2020-08-11",
+      "price": "169.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1400.00",
+      "vendor_name": "Razer",
+      "switch_name": "Cream",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 46,
+      "vendor_id": 11,
+      "switch_id": 64,
+      "layout_id": 1,
+      "name": "GMMK Pro",
+      "release_date": "2021-03-31",
+      "price": "169.99",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "1360.00",
+      "vendor_name": "Glorious",
+      "switch_name": "Tealios V2",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 80,
+      "vendor_id": 21,
+      "switch_id": 84,
+      "layout_id": 1,
+      "name": "K100 RGB",
+      "release_date": "2020-09-21",
+      "price": "229.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1200.00",
+      "vendor_name": "Corsair",
+      "switch_name": "Starfish",
+      "switch_type": "Linear"
+    }
+  ]
+}
 
 ```
-GET http://localhost/km-api/layouts/1/keyboards?price_min=100&price_max=300
+
+```
+GET http://localhost/hw1/layouts/1/keyboards?price_min=100&price_max=300
 ```
 Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 13,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 3
+  },
+  "keyboards": [
+    {
+      "keyboard_id": 1,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 1,
+      "name": "MX Board 3.0S",
+      "release_date": "2018-03-15",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1200.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 10,
+      "vendor_id": 2,
+      "switch_id": 15,
+      "layout_id": 1,
+      "name": "Keychron Q5",
+      "release_date": "2022-06-05",
+      "price": "219.99",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "1950.00",
+      "vendor_name": "Gateron",
+      "switch_name": "Blue",
+      "switch_type": "Clicky"
+    },
+    {
+      "keyboard_id": 14,
+      "vendor_id": 3,
+      "switch_id": 22,
+      "layout_id": 1,
+      "name": "Ducky One 2",
+      "release_date": "2018-08-30",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1180.00",
+      "vendor_name": "Kailh",
+      "switch_name": "Ink Black",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 22,
+      "vendor_id": 5,
+      "switch_id": 40,
+      "layout_id": 1,
+      "name": "BlackWidow V3",
+      "release_date": "2020-08-11",
+      "price": "169.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1400.00",
+      "vendor_name": "Razer",
+      "switch_name": "Cream",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 26,
+      "vendor_id": 6,
+      "switch_id": 44,
+      "layout_id": 1,
+      "name": "G915",
+      "release_date": "2019-08-26",
+      "price": "249.99",
+      "connectivity": "Both",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1025.00",
+      "vendor_name": "Logitech",
+      "switch_name": "Blue",
+      "switch_type": "Clicky"
+    }
+  ]
+}
+```
 
 
 ```
-GET http://localhost/km-api/layouts/1/keyboards?connectivity=Wireless
+GET http://localhost/hw1/layouts/1/keyboards?connectivity=Wireless
 ```
 Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 0,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 0
+  },
+  "keyboards": []
+}
+```
 
+## 7. Layout Keyboards Sub-Collection
 
+### GET /layout/{layout_id}/keyboards
+**Description:** Get keyboards that use a specific layout
+
+**Basic Request:**
+```
+GET http://localhost/hw1/layouts/1/keyboards
+```
+Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 16,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 4
+  },
+  "keyboards": [
+    {
+      "keyboard_id": 1,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 1,
+      "name": "MX Board 3.0S",
+      "release_date": "2018-03-15",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1200.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 3,
+      "vendor_id": 1,
+      "switch_id": 3,
+      "layout_id": 1,
+      "name": "MX Board 1.0 TKL",
+      "release_date": "2019-06-12",
+      "price": "99.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "950.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Brown",
+      "switch_type": "Tactile"
+    },
+    {
+      "keyboard_id": 10,
+      "vendor_id": 2,
+      "switch_id": 15,
+      "layout_id": 1,
+      "name": "Keychron Q5",
+      "release_date": "2022-06-05",
+      "price": "219.99",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "1950.00",
+      "vendor_name": "Gateron",
+      "switch_name": "Blue",
+      "switch_type": "Clicky"
+    },
+    {
+      "keyboard_id": 14,
+      "vendor_id": 3,
+      "switch_id": 22,
+      "layout_id": 1,
+      "name": "Ducky One 2",
+      "release_date": "2018-08-30",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1180.00",
+      "vendor_name": "Kailh",
+      "switch_name": "Ink Black",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 16,
+      "vendor_id": 4,
+      "switch_id": 31,
+      "layout_id": 1,
+      "name": "Tecware Phantom",
+      "release_date": "2019-07-15",
+      "price": "49.99",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Plastic",
+      "weight": "1050.00",
+      "vendor_name": "Outemu",
+      "switch_name": "Speed Bronze",
+      "switch_type": "Clicky"
+    }
+  ]
+}
+```
+
+**With Filters:**
+```
+GET http://localhost/hw1/layouts/1/keyboards?switch_type=Linear
+```
+Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 8,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 2
+  },
+  "keyboards": [
+    {
+      "keyboard_id": 1,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 1,
+      "name": "MX Board 3.0S",
+      "release_date": "2018-03-15",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1200.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 14,
+      "vendor_id": 3,
+      "switch_id": 22,
+      "layout_id": 1,
+      "name": "Ducky One 2",
+      "release_date": "2018-08-30",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1180.00",
+      "vendor_name": "Kailh",
+      "switch_name": "Ink Black",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 22,
+      "vendor_id": 5,
+      "switch_id": 40,
+      "layout_id": 1,
+      "name": "BlackWidow V3",
+      "release_date": "2020-08-11",
+      "price": "169.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1400.00",
+      "vendor_name": "Razer",
+      "switch_name": "Cream",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 46,
+      "vendor_id": 11,
+      "switch_id": 64,
+      "layout_id": 1,
+      "name": "GMMK Pro",
+      "release_date": "2021-03-31",
+      "price": "169.99",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "1360.00",
+      "vendor_name": "Glorious",
+      "switch_name": "Tealios V2",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 80,
+      "vendor_id": 21,
+      "switch_id": 84,
+      "layout_id": 1,
+      "name": "K100 RGB",
+      "release_date": "2020-09-21",
+      "price": "229.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1200.00",
+      "vendor_name": "Corsair",
+      "switch_name": "Starfish",
+      "switch_type": "Linear"
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/layouts/1/keyboards?price_min=100&price_max=300
+```
+Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 13,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 3
+  },
+  "keyboards": [
+    {
+      "keyboard_id": 1,
+      "vendor_id": 1,
+      "switch_id": 1,
+      "layout_id": 1,
+      "name": "MX Board 3.0S",
+      "release_date": "2018-03-15",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1200.00",
+      "vendor_name": "Cherry Corporation",
+      "switch_name": "MX Red",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 10,
+      "vendor_id": 2,
+      "switch_id": 15,
+      "layout_id": 1,
+      "name": "Keychron Q5",
+      "release_date": "2022-06-05",
+      "price": "219.99",
+      "connectivity": "Wired",
+      "hot_swappable": 1,
+      "case_material": "Aluminum",
+      "weight": "1950.00",
+      "vendor_name": "Gateron",
+      "switch_name": "Blue",
+      "switch_type": "Clicky"
+    },
+    {
+      "keyboard_id": 14,
+      "vendor_id": 3,
+      "switch_id": 22,
+      "layout_id": 1,
+      "name": "Ducky One 2",
+      "release_date": "2018-08-30",
+      "price": "129.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Plastic",
+      "weight": "1180.00",
+      "vendor_name": "Kailh",
+      "switch_name": "Ink Black",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 22,
+      "vendor_id": 5,
+      "switch_id": 40,
+      "layout_id": 1,
+      "name": "BlackWidow V3",
+      "release_date": "2020-08-11",
+      "price": "169.99",
+      "connectivity": "Wired",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1400.00",
+      "vendor_name": "Razer",
+      "switch_name": "Cream",
+      "switch_type": "Linear"
+    },
+    {
+      "keyboard_id": 26,
+      "vendor_id": 6,
+      "switch_id": 44,
+      "layout_id": 1,
+      "name": "G915",
+      "release_date": "2019-08-26",
+      "price": "249.99",
+      "connectivity": "Both",
+      "hot_swappable": 0,
+      "case_material": "Aluminum",
+      "weight": "1025.00",
+      "vendor_name": "Logitech",
+      "switch_name": "Blue",
+      "switch_type": "Clicky"
+    }
+  ]
+}
+```
+```
+GET http://localhost/hw1/layouts/1/keyboards?connectivity=Wireless
+```
+Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 0,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 0
+  },
+  "keyboards": []
+}
+```
 
