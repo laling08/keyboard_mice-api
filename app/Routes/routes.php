@@ -7,6 +7,7 @@ use App\Controllers\KeyboardsController;
 use App\Controllers\SwitchesController;
 use App\Controllers\VendorsController;
 use App\Controllers\LayoutsController;
+use App\Controllers\MiceController;
 use App\Helpers\DateTimeHelper;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -55,6 +56,17 @@ return static function (Slim\App $app): void { //! add your routes within this f
     //* ROUTE: GET /layouts/{layout_id}/keycap-sets
     // Sub-collection resource: Get keycap sets compatible with a specific layout
     $app->get('/layouts/{layout_id}/keycap-sets', [LayoutsController::class, 'handleGetKeycapSetsByLayoutId']);
+
+    // ========================================
+    // MOUSE RESOURCES
+    // ========================================
+    //* ROUTE: GET /mice
+    // Collection resource: List all mice with optional filters
+    $app->get('/mice', [MiceController::class, 'handleGetMice']);
+
+    //* ROUTE: GET /mice/{mouse_id}/buttons
+    // Sub-collection resource: Get buttons for a specific mouse
+    $app->get('/mice/{mouse_id}/buttons', [MiceController::class, 'handleGetButtonsByMouseId']);
 
     //* ROUTE: GET /ping
     $app->get('/ping', function (Request $request, Response $response, $args) {
