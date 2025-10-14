@@ -2621,3 +2621,1001 @@ Response:
   ]
 }
 ```
+
+## 8. Mice Collection
+
+### GET /mice
+**Description:** Get all mice
+
+**Basic Request:**
+```
+GET http://localhost/hw1/mice
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 40,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 8
+  },
+  "data": [
+    {
+      "mouse_id": 1,
+      "vendor_id": 6,
+      "name": "G Pro X Superlight",
+      "release_date": "2020-12-03",
+      "price": "149.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "63.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 5,
+      "avg_rating": "4.5000"
+    },
+    {
+      "mouse_id": 2,
+      "vendor_id": 6,
+      "name": "G502 Hero",
+      "release_date": "2018-09-20",
+      "price": "79.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wired",
+      "weight": "121.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 11,
+      "avg_rating": "3.5000"
+    },
+    {
+      "mouse_id": 3,
+      "vendor_id": 6,
+      "name": "G403 Hero",
+      "release_date": "2019-04-15",
+      "price": "69.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Both",
+      "weight": "87.30",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 6,
+      "avg_rating": "3.5000"
+    },
+    {
+      "mouse_id": 4,
+      "vendor_id": 6,
+      "name": "G Pro Wireless",
+      "release_date": "2018-08-19",
+      "price": "129.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "80.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 0,
+      "avg_rating": null
+    },
+    {
+      "mouse_id": 5,
+      "vendor_id": 6,
+      "name": "G305 Lightspeed",
+      "release_date": "2018-05-29",
+      "price": "59.99",
+      "sensor_id": 8,
+      "dpi_min": 200,
+      "dpi_max": 12000,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "99.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 0,
+      "avg_rating": null
+    }
+  ]
+}
+```
+
+**With Filters:**
+```
+GET http://localhost/hw1/mice?polling_rate=1000
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 33,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 7
+  },
+  "data": [
+    {
+      "mouse_id": 1,
+      "vendor_id": 6,
+      "name": "G Pro X Superlight",
+      "release_date": "2020-12-03",
+      "price": "149.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "63.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 5,
+      "avg_rating": "4.5000"
+    },
+    {
+      "mouse_id": 2,
+      "vendor_id": 6,
+      "name": "G502 Hero",
+      "release_date": "2018-09-20",
+      "price": "79.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wired",
+      "weight": "121.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 11,
+      "avg_rating": "3.5000"
+    },
+    {
+      "mouse_id": 3,
+      "vendor_id": 6,
+      "name": "G403 Hero",
+      "release_date": "2019-04-15",
+      "price": "69.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Both",
+      "weight": "87.30",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 6,
+      "avg_rating": "3.5000"
+    },
+    {
+      "mouse_id": 4,
+      "vendor_id": 6,
+      "name": "G Pro Wireless",
+      "release_date": "2018-08-19",
+      "price": "129.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "80.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 0,
+      "avg_rating": null
+    },
+    {
+      "mouse_id": 5,
+      "vendor_id": 6,
+      "name": "G305 Lightspeed",
+      "release_date": "2018-05-29",
+      "price": "59.99",
+      "sensor_id": 8,
+      "dpi_min": 200,
+      "dpi_max": 12000,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "99.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 0,
+      "avg_rating": null
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/mice?connection=Wireless
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 16,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 4
+  },
+  "data": [
+    {
+      "mouse_id": 1,
+      "vendor_id": 6,
+      "name": "G Pro X Superlight",
+      "release_date": "2020-12-03",
+      "price": "149.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "63.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 5,
+      "avg_rating": "4.5000"
+    },
+    {
+      "mouse_id": 4,
+      "vendor_id": 6,
+      "name": "G Pro Wireless",
+      "release_date": "2018-08-19",
+      "price": "129.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "80.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 0,
+      "avg_rating": null
+    },
+    {
+      "mouse_id": 5,
+      "vendor_id": 6,
+      "name": "G305 Lightspeed",
+      "release_date": "2018-05-29",
+      "price": "59.99",
+      "sensor_id": 8,
+      "dpi_min": 200,
+      "dpi_max": 12000,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "99.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 0,
+      "avg_rating": null
+    },
+    {
+      "mouse_id": 7,
+      "vendor_id": 6,
+      "name": "MX Master 3",
+      "release_date": "2019-09-26",
+      "price": "99.99",
+      "sensor_id": 4,
+      "dpi_min": 200,
+      "dpi_max": 4000,
+      "polling_rate": 125,
+      "connection": "Wireless",
+      "weight": "141.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "PixArt PMW3330",
+      "button_count": 0,
+      "avg_rating": null
+    },
+    {
+      "mouse_id": 8,
+      "vendor_id": 5,
+      "name": "DeathAdder V3 Pro",
+      "release_date": "2022-09-15",
+      "price": "149.99",
+      "sensor_id": 12,
+      "dpi_min": 50,
+      "dpi_max": 30000,
+      "polling_rate": 8000,
+      "connection": "Wireless",
+      "weight": "88.00",
+      "vendor_name": "Razer",
+      "sensor_name": "Focus Pro 30K",
+      "button_count": 7,
+      "avg_rating": "4.5000"
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/mice?weight_min=120
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 5,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 1
+  },
+  "data": [
+    {
+      "mouse_id": 2,
+      "vendor_id": 6,
+      "name": "G502 Hero",
+      "release_date": "2018-09-20",
+      "price": "79.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wired",
+      "weight": "121.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 11,
+      "avg_rating": "3.5000"
+    },
+    {
+      "mouse_id": 7,
+      "vendor_id": 6,
+      "name": "MX Master 3",
+      "release_date": "2019-09-26",
+      "price": "99.99",
+      "sensor_id": 4,
+      "dpi_min": 200,
+      "dpi_max": 4000,
+      "polling_rate": 125,
+      "connection": "Wireless",
+      "weight": "141.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "PixArt PMW3330",
+      "button_count": 0,
+      "avg_rating": null
+    },
+    {
+      "mouse_id": 26,
+      "vendor_id": 21,
+      "name": "Dark Core RGB Pro",
+      "release_date": "2020-03-17",
+      "price": "89.99",
+      "sensor_id": 16,
+      "dpi_min": 100,
+      "dpi_max": 18000,
+      "polling_rate": 1000,
+      "connection": "Both",
+      "weight": "133.00",
+      "vendor_name": "Corsair",
+      "sensor_name": "PixArt PMW3310",
+      "button_count": 0,
+      "avg_rating": null
+    },
+    {
+      "mouse_id": 29,
+      "vendor_id": 22,
+      "name": "Rival 650 Wireless",
+      "release_date": "2018-06-12",
+      "price": "99.99",
+      "sensor_id": 9,
+      "dpi_min": 100,
+      "dpi_max": 12000,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "153.00",
+      "vendor_name": "SteelSeries",
+      "sensor_name": "TrueMove Core",
+      "button_count": 0,
+      "avg_rating": null
+    },
+    {
+      "mouse_id": 33,
+      "vendor_id": 23,
+      "name": "Pulsefire Surge",
+      "release_date": "2018-01-09",
+      "price": "69.99",
+      "sensor_id": 16,
+      "dpi_min": 50,
+      "dpi_max": 16000,
+      "polling_rate": 1000,
+      "connection": "Wired",
+      "weight": "132.00",
+      "vendor_name": "HyperX",
+      "sensor_name": "PixArt PMW3310",
+      "button_count": 0,
+      "avg_rating": null
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/mice?weight_max=120
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 35,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 7
+  },
+  "data": [
+    {
+      "mouse_id": 1,
+      "vendor_id": 6,
+      "name": "G Pro X Superlight",
+      "release_date": "2020-12-03",
+      "price": "149.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "63.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 5,
+      "avg_rating": "4.5000"
+    },
+    {
+      "mouse_id": 3,
+      "vendor_id": 6,
+      "name": "G403 Hero",
+      "release_date": "2019-04-15",
+      "price": "69.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Both",
+      "weight": "87.30",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 6,
+      "avg_rating": "3.5000"
+    },
+    {
+      "mouse_id": 4,
+      "vendor_id": 6,
+      "name": "G Pro Wireless",
+      "release_date": "2018-08-19",
+      "price": "129.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "80.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 0,
+      "avg_rating": null
+    },
+    {
+      "mouse_id": 5,
+      "vendor_id": 6,
+      "name": "G305 Lightspeed",
+      "release_date": "2018-05-29",
+      "price": "59.99",
+      "sensor_id": 8,
+      "dpi_min": 200,
+      "dpi_max": 12000,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "99.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 0,
+      "avg_rating": null
+    },
+    {
+      "mouse_id": 6,
+      "vendor_id": 6,
+      "name": "G203 Lightsync",
+      "release_date": "2020-04-14",
+      "price": "39.99",
+      "sensor_id": 13,
+      "dpi_min": 200,
+      "dpi_max": 8000,
+      "polling_rate": 1000,
+      "connection": "Wired",
+      "weight": "85.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "PixArt PAW3212",
+      "button_count": 0,
+      "avg_rating": null
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/mice?price_min=50&price_max=150
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 27,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 6
+  },
+  "data": [
+    {
+      "mouse_id": 1,
+      "vendor_id": 6,
+      "name": "G Pro X Superlight",
+      "release_date": "2020-12-03",
+      "price": "149.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "63.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 5,
+      "avg_rating": "4.5000"
+    },
+    {
+      "mouse_id": 2,
+      "vendor_id": 6,
+      "name": "G502 Hero",
+      "release_date": "2018-09-20",
+      "price": "79.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wired",
+      "weight": "121.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 11,
+      "avg_rating": "3.5000"
+    },
+    {
+      "mouse_id": 3,
+      "vendor_id": 6,
+      "name": "G403 Hero",
+      "release_date": "2019-04-15",
+      "price": "69.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Both",
+      "weight": "87.30",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 6,
+      "avg_rating": "3.5000"
+    },
+    {
+      "mouse_id": 4,
+      "vendor_id": 6,
+      "name": "G Pro Wireless",
+      "release_date": "2018-08-19",
+      "price": "129.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "80.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 0,
+      "avg_rating": null
+    },
+    {
+      "mouse_id": 5,
+      "vendor_id": 6,
+      "name": "G305 Lightspeed",
+      "release_date": "2018-05-29",
+      "price": "59.99",
+      "sensor_id": 8,
+      "dpi_min": 200,
+      "dpi_max": 12000,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "99.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 0,
+      "avg_rating": null
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/mice?button_count_min=10
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 1,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 1
+  },
+  "data": [
+    {
+      "mouse_id": 2,
+      "vendor_id": 6,
+      "name": "G502 Hero",
+      "release_date": "2018-09-20",
+      "price": "79.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wired",
+      "weight": "121.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 11,
+      "avg_rating": "3.5000"
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/mice?avg_rating_min=5
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 1,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 1
+  },
+  "data": [
+    {
+      "mouse_id": 9,
+      "vendor_id": 5,
+      "name": "Viper V2 Pro",
+      "release_date": "2022-03-17",
+      "price": "149.99",
+      "sensor_id": 12,
+      "dpi_min": 50,
+      "dpi_max": 30000,
+      "polling_rate": 8000,
+      "connection": "Wireless",
+      "weight": "58.00",
+      "vendor_name": "Razer",
+      "sensor_name": "Focus Pro 30K",
+      "button_count": 8,
+      "avg_rating": "5.0000"
+    }
+  ]
+}
+```
+
+
+**Combined:**
+```
+GET http://localhost/hw1/mice?connection=Wireless&weight_max=100&button_count_min=5
+```
+Response:
+```json
+{
+  "meta": {
+    "total": 5,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 1
+  },
+  "data": [
+    {
+      "mouse_id": 1,
+      "vendor_id": 6,
+      "name": "G Pro X Superlight",
+      "release_date": "2020-12-03",
+      "price": "149.99",
+      "sensor_id": 8,
+      "dpi_min": 100,
+      "dpi_max": 25600,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "63.00",
+      "vendor_name": "Logitech",
+      "sensor_name": "Hero 25K",
+      "button_count": 5,
+      "avg_rating": "4.5000"
+    },
+    {
+      "mouse_id": 8,
+      "vendor_id": 5,
+      "name": "DeathAdder V3 Pro",
+      "release_date": "2022-09-15",
+      "price": "149.99",
+      "sensor_id": 12,
+      "dpi_min": 50,
+      "dpi_max": 30000,
+      "polling_rate": 8000,
+      "connection": "Wireless",
+      "weight": "88.00",
+      "vendor_name": "Razer",
+      "sensor_name": "Focus Pro 30K",
+      "button_count": 7,
+      "avg_rating": "4.5000"
+    },
+    {
+      "mouse_id": 9,
+      "vendor_id": 5,
+      "name": "Viper V2 Pro",
+      "release_date": "2022-03-17",
+      "price": "149.99",
+      "sensor_id": 12,
+      "dpi_min": 50,
+      "dpi_max": 30000,
+      "polling_rate": 8000,
+      "connection": "Wireless",
+      "weight": "58.00",
+      "vendor_name": "Razer",
+      "sensor_name": "Focus Pro 30K",
+      "button_count": 8,
+      "avg_rating": "5.0000"
+    },
+    {
+      "mouse_id": 15,
+      "vendor_id": 11,
+      "name": "Model O Wireless",
+      "release_date": "2020-11-10",
+      "price": "79.99",
+      "sensor_id": 1,
+      "dpi_min": 100,
+      "dpi_max": 19000,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "69.00",
+      "vendor_name": "Glorious",
+      "sensor_name": "PixArt PMW3360",
+      "button_count": 6,
+      "avg_rating": "4.5000"
+    },
+    {
+      "mouse_id": 24,
+      "vendor_id": 10,
+      "name": "AG325 Wireless",
+      "release_date": "2021-11-30",
+      "price": "79.99",
+      "sensor_id": 1,
+      "dpi_min": 100,
+      "dpi_max": 16000,
+      "polling_rate": 1000,
+      "connection": "Wireless",
+      "weight": "75.00",
+      "vendor_name": "Akko",
+      "sensor_name": "PixArt PMW3360",
+      "button_count": 6,
+      "avg_rating": "4.0000"
+    }
+  ]
+}
+```
+
+## 9. Mouse Buttons Sub-Collection
+
+### GET /mice/{mouse_id}/buttons
+**Description:** Get buttons for a specific mouse
+
+**Basic Request:**
+```
+GET http://localhost/hw1/mice/1/buttons
+```
+Response:
+```json
+{
+  "mouse": {
+    "mouse_id": 1,
+    "vendor_id": 6,
+    "name": "G Pro X Superlight",
+    "release_date": "2020-12-03",
+    "price": "149.99",
+    "sensor_id": 8,
+    "dpi_min": 100,
+    "dpi_max": 25600,
+    "polling_rate": 1000,
+    "connection": "Wireless",
+    "weight": "63.00",
+    "vendor_name": "Logitech",
+    "sensor_name": "Hero 25K"
+  },
+  "meta": {
+    "total": 5,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 1
+  },
+  "buttons": [
+    {
+      "button_id": 1,
+      "mouse_id": 1,
+      "name": "Left Click",
+      "programmable": 0
+    },
+    {
+      "button_id": 2,
+      "mouse_id": 1,
+      "name": "Right Click",
+      "programmable": 0
+    },
+    {
+      "button_id": 3,
+      "mouse_id": 1,
+      "name": "Middle Click",
+      "programmable": 1
+    },
+    {
+      "button_id": 4,
+      "mouse_id": 1,
+      "name": "Side Button 1",
+      "programmable": 1
+    },
+    {
+      "button_id": 5,
+      "mouse_id": 1,
+      "name": "Side Button 2",
+      "programmable": 1
+    }
+  ]
+}
+```
+
+**With Filters:**
+```
+GET http://localhost/hw1/mice/1/buttons?programmable=true
+```
+Response:
+```json
+{
+  "mouse": {
+    "mouse_id": 1,
+    "vendor_id": 6,
+    "name": "G Pro X Superlight",
+    "release_date": "2020-12-03",
+    "price": "149.99",
+    "sensor_id": 8,
+    "dpi_min": 100,
+    "dpi_max": 25600,
+    "polling_rate": 1000,
+    "connection": "Wireless",
+    "weight": "63.00",
+    "vendor_name": "Logitech",
+    "sensor_name": "Hero 25K"
+  },
+  "meta": {
+    "total": 3,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 1
+  },
+  "buttons": [
+    {
+      "button_id": 3,
+      "mouse_id": 1,
+      "name": "Middle Click",
+      "programmable": 1
+    },
+    {
+      "button_id": 4,
+      "mouse_id": 1,
+      "name": "Side Button 1",
+      "programmable": 1
+    },
+    {
+      "button_id": 5,
+      "mouse_id": 1,
+      "name": "Side Button 2",
+      "programmable": 1
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/mice/1/buttons?name=Left
+```
+Response:
+```json
+{
+  "mouse": {
+    "mouse_id": 1,
+    "vendor_id": 6,
+    "name": "G Pro X Superlight",
+    "release_date": "2020-12-03",
+    "price": "149.99",
+    "sensor_id": 8,
+    "dpi_min": 100,
+    "dpi_max": 25600,
+    "polling_rate": 1000,
+    "connection": "Wireless",
+    "weight": "63.00",
+    "vendor_name": "Logitech",
+    "sensor_name": "Hero 25K"
+  },
+  "meta": {
+    "total": 0,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 0
+  },
+  "buttons": []
+}
+```
+
+```
+GET http://localhost/hw1/mice/1/buttons?name_contains=Side
+```
+Response:
+```json
+{
+  "mouse": {
+    "mouse_id": 1,
+    "vendor_id": 6,
+    "name": "G Pro X Superlight",
+    "release_date": "2020-12-03",
+    "price": "149.99",
+    "sensor_id": 8,
+    "dpi_min": 100,
+    "dpi_max": 25600,
+    "polling_rate": 1000,
+    "connection": "Wireless",
+    "weight": "63.00",
+    "vendor_name": "Logitech",
+    "sensor_name": "Hero 25K"
+  },
+  "meta": {
+    "total": 2,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 1
+  },
+  "buttons": [
+    {
+      "button_id": 4,
+      "mouse_id": 1,
+      "name": "Side Button 1",
+      "programmable": 1
+    },
+    {
+      "button_id": 5,
+      "mouse_id": 1,
+      "name": "Side Button 2",
+      "programmable": 1
+    }
+  ]
+}
+```
