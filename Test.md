@@ -2562,3 +2562,408 @@ Response:
 }
 ```
 
+## 8. Layout Keycap Sets Sub-Collection
+
+### GET /layout/{layout_id}/keycap-sets
+**Description:** Get keycap sets compatible with a specific layout.
+
+**Basic Request:**
+```
+GET http://localhost/hw1/layouts/1/keycap-sets
+```
+Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 17,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 4
+  },
+  "keycap_sets": [
+    {
+      "keycap_id": 1,
+      "name": "GMK Olivia++",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "139.00",
+      "release_date": "2020-11-15",
+      "colorway": "Light Pink/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 2,
+      "name": "GMK Botanical",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "135.00",
+      "release_date": "2020-08-20",
+      "colorway": "Green/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 3,
+      "name": "GMK Dracula",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "129.00",
+      "release_date": "2020-05-12",
+      "colorway": "Purple/Pink",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 4,
+      "name": "GMK Cafe",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "132.00",
+      "release_date": "2019-12-08",
+      "colorway": "Brown/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 5,
+      "name": "GMK Hennessey",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "138.00",
+      "release_date": "2021-03-25",
+      "colorway": "Cognac/Gold",
+      "finish": "Glossy"
+    }
+  ]
+}
+```
+
+**With Filters:**
+```
+GET http://localhost/hw1/layouts/1/keycap-sets?material=PBT
+```
+Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 11,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 3
+  },
+  "keycap_sets": [
+    {
+      "keycap_id": 6,
+      "name": "SA Bliss",
+      "material": "PBT",
+      "profile": "SA",
+      "manufacturer": "Signature Plastics",
+      "price": "175.00",
+      "release_date": "2019-09-14",
+      "colorway": "Pink/Purple",
+      "finish": "Matte"
+    },
+    {
+      "keycap_id": 7,
+      "name": "SA Godspeed",
+      "material": "PBT",
+      "profile": "SA",
+      "manufacturer": "Signature Plastics",
+      "price": "165.00",
+      "release_date": "2018-06-30",
+      "colorway": "Blue/Orange",
+      "finish": "Matte"
+    },
+    {
+      "keycap_id": 11,
+      "name": "Cherry WoB",
+      "material": "PBT",
+      "profile": "Cherry",
+      "manufacturer": "Cherry",
+      "price": "45.00",
+      "release_date": "2020-01-10",
+      "colorway": "White/Black",
+      "finish": "Matte"
+    },
+    {
+      "keycap_id": 12,
+      "name": "Akko ASA Neon",
+      "material": "PBT",
+      "profile": "ASA",
+      "manufacturer": "Akko",
+      "price": "39.99",
+      "release_date": "2021-07-05",
+      "colorway": "Cyan/Pink",
+      "finish": "Matte"
+    },
+    {
+      "keycap_id": 13,
+      "name": "Akko Cherry Retro",
+      "material": "PBT",
+      "profile": "Cherry",
+      "manufacturer": "Akko",
+      "price": "35.99",
+      "release_date": "2021-04-12",
+      "colorway": "Beige/Brown",
+      "finish": "Matte"
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/layouts/1/keycap-sets?profile=Cherry
+```
+Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 10,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 2
+  },
+  "keycap_sets": [
+    {
+      "keycap_id": 1,
+      "name": "GMK Olivia++",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "139.00",
+      "release_date": "2020-11-15",
+      "colorway": "Light Pink/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 2,
+      "name": "GMK Botanical",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "135.00",
+      "release_date": "2020-08-20",
+      "colorway": "Green/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 3,
+      "name": "GMK Dracula",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "129.00",
+      "release_date": "2020-05-12",
+      "colorway": "Purple/Pink",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 4,
+      "name": "GMK Cafe",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "132.00",
+      "release_date": "2019-12-08",
+      "colorway": "Brown/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 5,
+      "name": "GMK Hennessey",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "138.00",
+      "release_date": "2021-03-25",
+      "colorway": "Cognac/Gold",
+      "finish": "Glossy"
+    }
+  ]
+}
+```
+```
+GET http://localhost/hw1/layouts/1/keycap-sets?price_max=150
+```
+Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 17,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 4
+  },
+  "keycap_sets": [
+    {
+      "keycap_id": 1,
+      "name": "GMK Olivia++",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "139.00",
+      "release_date": "2020-11-15",
+      "colorway": "Light Pink/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 2,
+      "name": "GMK Botanical",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "135.00",
+      "release_date": "2020-08-20",
+      "colorway": "Green/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 3,
+      "name": "GMK Dracula",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "129.00",
+      "release_date": "2020-05-12",
+      "colorway": "Purple/Pink",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 4,
+      "name": "GMK Cafe",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "132.00",
+      "release_date": "2019-12-08",
+      "colorway": "Brown/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 5,
+      "name": "GMK Hennessey",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "138.00",
+      "release_date": "2021-03-25",
+      "colorway": "Cognac/Gold",
+      "finish": "Glossy"
+    }
+  ]
+}
+```
+
+```
+GET http://localhost/hw1/layouts/1/keycap-sets?manufacturer=GMK
+```
+Response:
+```json
+{
+  "layout": {
+    "layout_id": 1,
+    "name": "Full Size",
+    "description": "Standard full-size layout with numpad",
+    "key_count": 104,
+    "is_iso": 0
+  },
+  "meta": {
+    "total": 5,
+    "offset": 0,
+    "current_page": 1,
+    "page_size": 5,
+    "total_pages": 1
+  },
+  "keycap_sets": [
+    {
+      "keycap_id": 1,
+      "name": "GMK Olivia++",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "139.00",
+      "release_date": "2020-11-15",
+      "colorway": "Light Pink/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 2,
+      "name": "GMK Botanical",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "135.00",
+      "release_date": "2020-08-20",
+      "colorway": "Green/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 3,
+      "name": "GMK Dracula",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "129.00",
+      "release_date": "2020-05-12",
+      "colorway": "Purple/Pink",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 4,
+      "name": "GMK Cafe",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "132.00",
+      "release_date": "2019-12-08",
+      "colorway": "Brown/Cream",
+      "finish": "Glossy"
+    },
+    {
+      "keycap_id": 5,
+      "name": "GMK Hennessey",
+      "material": "ABS",
+      "profile": "Cherry",
+      "manufacturer": "GMK",
+      "price": "138.00",
+      "release_date": "2021-03-25",
+      "colorway": "Cognac/Gold",
+      "finish": "Glossy"
+    }
+  ]
+}
+```
