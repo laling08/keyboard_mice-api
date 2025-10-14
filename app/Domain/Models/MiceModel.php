@@ -20,6 +20,7 @@ class MiceModel extends BaseModel
 
     /**
      * Retrieves mice with optional filtering
+     *
      * @param array $filters Associative array of filter parameters
      * @return array Paginated result with meta and data
      */
@@ -32,7 +33,7 @@ class MiceModel extends BaseModel
                        AVG(mr.rating) as avg_rating
                 FROM mice m
                 INNER JOIN vendors v ON m.vendor_id = v.vendor_id
-                INNER JOIN mouse_sensor ms ON m.sensor_id = ms.sensor_id
+                INNER JOIN mouse_sensors ms ON m.sensor_id = ms.sensor_id
                 LEFT JOIN mouse_buttons mb ON m.mouse_id = mb.mouse_id
                 LEFT JOIN mouse_reviews mr ON m.mouse_id = mr.mouse_id
                 WHERE 1=1";
@@ -64,12 +65,12 @@ class MiceModel extends BaseModel
 
         // Filter by price range
         if (!empty($filters["price_min"])) {
-            $sql .= " AND m.price <= :price_min";
+            $sql .= " AND m.price >= :price_min";
             $pdo_values["price_min"] = $filters["price_min"];
         }
 
         if (!empty($filters["price_max"])) {
-            $sql .= " AND m.price >= :price_max";
+            $sql .= " AND m.price <= :price_max";
             $pdo_values["price_max"] = $filters["price_max"];
         }
 
@@ -84,7 +85,6 @@ class MiceModel extends BaseModel
 
         // Filter by average rating minimum
         if (!empty($filters["avg_rating_min"])) {
-            // Handle case where there might be no HAVING clause yet
             if (empty($filters["button_count_min"])) {
                 $sql .= " HAVING AVG(mr.rating) >= :avg_rating_min";
             } else {
