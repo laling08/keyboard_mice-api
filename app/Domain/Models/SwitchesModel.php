@@ -18,6 +18,14 @@ class SwitchesModel extends BaseModel
         parent::__construct($pdo);
     }
 
+    /**
+     * Retrieves switches for a vendor with optional filtering
+     *
+     * @param int   $vendor_id  The vendor's unique identifier
+     * @param array $filters    
+     *
+     * @return mixed Array with 'vendor', 'meta', and 'switches' keys, or false if vendor not found
+     */
     public function getSwitchesByVendorId(int $vendor_id, array $filters): mixed
     {
         //* STEP 1: Fetch the parent vendor resource
