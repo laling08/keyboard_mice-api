@@ -25,6 +25,10 @@ class VendorsModel extends BaseModel
      * - avg_price_min: minimum average keyboard price.
      * - avg_price_max: maximum average keyboard price.
      *
+     *  Supported sorting:
+     * - sort: field to sort by (name, founded_year, country, keyboard_count, avg_keyboard_price)
+     * - order: sort direction (asc or desc), defaults to asc
+     *
      * @param array $filters Associative array of filter parameters.
      * @return array Paginated result with meta and data.
      */
@@ -87,6 +91,30 @@ class VendorsModel extends BaseModel
             }
             $pdo_values["avg_price_max"] = $filters["avg_price_max"];
         }
+
+        // Determine sort field and order
+        $allowed_sort_fields = ["name", "founded_year", "country", "keyboard_count", "avg_keyboard_price"];
+        $sort_field = "v.name"; // Default sort field
+        $sort_order = "ASC"; // Default sort order
+
+        if (!empty($filters["sort"]) && in_array($filters["sort"], $allowed_sort_fields)) {
+            // Map sort field to actual column
+            if ($filters["sort"] === "keyboard_count") {
+                $sort_field = "keyboard_count";
+            } elseif ($filters["sort"] === "avg_keyboard_price") {
+                $sort_field = "avg_keyboard_price";
+            } else {
+                $sort_field = "v." . $filters["sort"];
+            }
+        }
+
+        // Validate sort order
+        if (!empty($filters["order"]) && strtoupper($filters["order"]) === "DESC") {
+            $sort_order = "DESC";
+        }
+
+        // Add ORDER BY clause
+        $sql .= " ORDER BY {$sort_field} {$sort_order}";
 
         return $this->paginate($sql, $pdo_values);
     }

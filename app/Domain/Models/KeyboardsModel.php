@@ -19,7 +19,10 @@ class KeyboardsModel extends BaseModel
     }
 
     /**
-     * Retrieves keyboards with optional filtering
+     * Retrieves keyboards with optional filtering.
+     * Supported sorting:
+     * - sort: field to sort by (name, price, weight, release_date, vendor_name)
+     * - order: sort direction (asc or desc), defaults to asc
      *
      * @param array $filters Associative array of filter parameters
      * @return array Paginated result with meta and data.
@@ -81,6 +84,28 @@ class KeyboardsModel extends BaseModel
             $sql .= " AND p.firmware = :pcb_firmware";
             $pdo_values["pcb_firmware"] = $filters["pcb_firmware"];
         }
+
+        // Determine sort field and order
+        $allowed_sort_fields = ["name", "price", "weight", "release_date", "vendor_name"];
+        $sort_field = "k.name"; // Default sort field
+        $sort_order = "ASC"; // Default sort order
+
+        if (!empty($filters["sort"]) && in_array($filters["sort"], $allowed_sort_fields)) {
+            // Map sort field to actual column
+            if ($filters["sort"] === "vendor_name") {
+                $sort_field = "v.name";
+            } else {
+                $sort_field = "k." . $filters["sort"];
+            }
+        }
+
+        // Validate sort order
+        if (!empty($filters["order"]) && strtoupper($filters["order"]) === "DESC") {
+            $sort_order = "DESC";
+        }
+
+        // Add ORDER BY clause
+        $sql .= " ORDER BY {$sort_field} {$sort_order}";
 
         return $this->paginate($sql, $pdo_values);
     }

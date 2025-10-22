@@ -3619,3 +3619,64 @@ Response:
   ]
 }
 ```
+## 10. Testing Sort With Keyboards
+
+Sort keyboards by name (A-Z)
+```
+GET /keyboards?sort=name&order=asc
+```
+Sort keyboards by price (cheapest first)
+```
+GET /keyboards?sort=price&order=asc
+```
+Sort keyboards by price (most expensive first)
+```
+GET /keyboards?sort=price&order=desc
+```
+Sort by weight (lightest first)
+```
+GET /keyboards?sort=weight&order=asc
+```
+Sort by release date (newest first)
+```
+GET /keyboards?sort=release_date&order=desc
+```
+
+Sort by vendor name
+```
+GET /keyboards?sort=vendor_name&order=asc
+```
+Combine sorting with filtering
+```
+GET /keyboards?connectivity=Wireless&sort=price&order=asc
+```
+
+## 11. Testing sort with Vendors
+
+Sort vendors by name (A-Z)
+```
+GET /vendors?sort=name&order=asc
+```
+
+Sort vendors by founding year (oldest first)
+```
+GET /vendors?sort=founded_year&order=asc
+```
+
+Sort vendors by founding year (newest first)
+```
+GET /vendors?sort=founded_year&order=desc
+```
+Sort by keyboard count (most productive vendors first)
+```
+GET /vendors?sort=keyboard_count&order=desc
+```
+Sort by average keyboard price (most expensive first)
+```
+GET /vendors?sort=avg_keyboard_price&order=desc
+```
+Combine sorting with filtering
+
+```
+GET /vendors?country=Germany&sort=founded_year&order=asc
+```
