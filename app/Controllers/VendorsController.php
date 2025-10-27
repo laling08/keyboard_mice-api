@@ -25,6 +25,12 @@ class VendorsController extends BaseController
 
         //* Get filters from query string.
         $filters = $request->getQueryParams();
+
+        $page = isset($filters['page']) ? (int)$filters['page'] : 1;
+        $page_size = isset($filters['page_size']) ? (int)$filters['page_size'] : 5;
+
+        $this->vendors_model->setPaginationOptions($page, $page_size);
+
         //* Fetch vendors from database.
         $vendors = $this->vendors_model->getVendors($filters);
         //* Return JSON response.

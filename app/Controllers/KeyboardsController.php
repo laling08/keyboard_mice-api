@@ -19,7 +19,7 @@ class KeyboardsController extends BaseController
      * @param \Psr\Http\Message\ResponseInterface $response The HTTP response
      * @return Response JSON response containing the filtered keyboard data.
      */
-    public function handleGetKeyboards (Request $request, Response $response): Response
+    public function handleGetKeyboards(Request $request, Response $response): Response
     {
         //* Step 1: Get filters from query string
         $filters = $request->getQueryParams();
@@ -29,7 +29,6 @@ class KeyboardsController extends BaseController
 
         //* Step 3: Return JSON response
         return $this->renderJson($response, $keyboards);
-
     }
 
     /**
@@ -41,11 +40,11 @@ class KeyboardsController extends BaseController
      * @param array $uri_args URI parameters including keyboard_id
      * @return Response JSON response with keyboard data or error
      */
-    public function handleGetKeyboardById (
+    public function handleGetKeyboardById(
         Request $request,
         Response $response,
         array $uri_args
-    ) : Response {
+    ): Response {
 
         //* Step 1: Get ID from URI
         $keyboard_id = (int) $uri_args["keyboard_id"];

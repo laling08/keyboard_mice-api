@@ -38,6 +38,11 @@ class SwitchesController extends BaseController
         //* Get filter parameters from query string.
         $filters = $request->getQueryParams();
 
+        $page = isset($filters['page']) ? (int)$filters['page'] : 1;
+        $page_size = isset($filters['page_size']) ? (int)$filters['page_size'] : 5;
+
+        $this->switches_model->setPaginationOptions($page, $page_size);
+
         //* Fetch switches for this vendor.
         $result = $this->switches_model->getSwitchesByVendorId($vendor_id, $filters);
 

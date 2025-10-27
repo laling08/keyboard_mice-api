@@ -2,6 +2,7 @@
 # Testing Guide for REST API Assignment
 This guide will show the documentation of testing the resources of this homework.
 
+
 ## Base URL
 All requests use: `http://localhost/hw1`
 
